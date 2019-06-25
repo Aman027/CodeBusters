@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
+from accounts.forms import RegistrationForm, LoginForm
 from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
@@ -7,19 +7,19 @@ from django.contrib.auth.decorators import login_required
 loggedin = 'false'
 
 def signup_view(request):
+
+    global loggedin
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             loggedin = 'true'
             login(request, user)
             return redirect('accounts:login_index')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     return render(request,'accounts/signup.html',{'form':form})
-
-def signup_index(request):
-    return HttpResponse("You are signed up")
 
 def login_view(request):
         
@@ -30,7 +30,7 @@ def login_view(request):
     
         else:    
             if request.method == 'POST':
-                form = AuthenticationForm(data=request.POST)
+                form = LoginForm(data=request.POST)
                 if form.is_valid():
                     #log the user in
                     user = form.get_user()
@@ -39,7 +39,7 @@ def login_view(request):
                     return redirect('accounts:login_index') 
 
             else:
-                form = AuthenticationForm()
+                form = LoginForm()
             return render(request, 'accounts/login.html', {'form':form})
     
 
@@ -56,9 +56,12 @@ def logout_view(request):
         return redirect('accounts:home')
 
 def home(request):
-    return render(request, 'accounts/homepage.html')
+    global loggedin
 
-def base(request):
-    return render(request, 'accounts/base.html')
+    if loggedin is 'true':
+        return redirect('accounts:login_index')
+
+    else:
+        return render(request, 'accounts/homepage.html')
 
 # Create your views here.
