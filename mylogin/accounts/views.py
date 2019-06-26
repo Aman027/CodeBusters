@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from accounts.forms import RegistrationForm, LoginForm
+from accounts.forms import BuyerRegistrationForm, SellerRegistrationForm, LoginForm
 from django.http import HttpResponse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 
 loggedin = 'false'
 
-def signup_view(request):
+def buyer_signup_view(request):
 
     global loggedin
 
@@ -15,15 +15,35 @@ def signup_view(request):
 
     else:
         if request.method == 'POST':
-            form = RegistrationForm(request.POST)
+            form = BuyerRegistrationForm(request.POST)
             if form.is_valid():
                 user = form.save()
                 loggedin = 'true'
                 login(request, user)
                 return redirect('accounts:login_index')
         else:
-            form = RegistrationForm()
+            form = BuyerRegistrationForm()
         return render(request,'accounts/signup.html',{'form':form})
+
+
+def seller_signup_view(request):
+
+    global loggedin
+
+    if loggedin is 'true':
+            return redirect('accounts:login_index')
+
+    else:
+        if request.method == 'POST':
+            form = SellerRegistrationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                loggedin = 'true'
+                login(request, user)
+                return redirect('accounts:login_index')
+        else:
+            form = SellerRegistrationForm()
+        return render(request,'accounts/sellersignup.html',{'form':form})        
 
 def login_view(request):
         
