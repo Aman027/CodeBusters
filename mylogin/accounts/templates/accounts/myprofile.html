@@ -13,15 +13,6 @@
 
 <ul class="nav navbar-nav ml-auto">
         <li class="nav-item mr-3 pt-1">
-            <form action="{% url 'accounts:my_profile' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-light btn-lg">
-                    <span class="fas fa-sign-out-alt"></span> profile
-            </button>
-            </form>
-        </li>
-
-        <li class="nav-item mr-3 pt-1">
             <form action="{% url 'accounts:logout' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-light btn-lg">
@@ -30,5 +21,30 @@
             </form>
         </li>
 </ul>
+{% endblock %}
+
+{% block div %}
+<br>
+<br><br><br><br><br><br><br>
+
+<ul>
+    <li>{{user}}</li>
+    <li>{{user.email}}</li>
+    <br>
+
+    <form action="">
+    <button type="submit" class="btn btn-info">
+        edit_profile
+    </button>
+    </form>
+    <br>
+    <form action="">
+    <button tyoe="submit" class="btn btn-info">
+        reset_password
+    </button>
+    </form>
+    </ul>
+
 
 {% endblock %}
+

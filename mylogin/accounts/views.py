@@ -64,6 +64,10 @@ def login_view(request):
             else:
                 form = LoginForm()
             return render(request, 'accounts/login.html', {'form':form})
+
+
+def my_profile(request):
+    return render(request, 'accounts/myprofile.html',{'user':request.user})
     
 
 
