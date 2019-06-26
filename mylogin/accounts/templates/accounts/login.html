@@ -1,12 +1,21 @@
 {% extends 'accounts/base.html' %}
 
+{% block css %}
+
+    button:hover{
+        transform: scale(1.1);
+        box-shadow: 5px 5px 5px black;
+    }
+
+{% endblock %}
+
 {% block body %}
 
 <ul class="nav navbar-nav ml-auto">
 <li class="nav-item pt-1">
-        <form action="{% url 'accounts:signup' %}">
+        <form action="{% url 'accounts:signup_options' %}">
         {% csrf_token %}
-        <button type="submit" class="btn btn-light btn-lg">
+        <button type="submit" class="btn btn-light btn-lg" id="btn1">
             <span class="fas fa-handshake"></span> SignUp
         </button>
         </form>

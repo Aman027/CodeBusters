@@ -47,12 +47,4 @@ class LoginForm(AuthenticationForm):
             'password',
             'login_as',
         )
-    
-    def save(self, commit=True):
-        user.login_as = self.cleaned_data['login_as']
-
-        if commit:
-            user.save()
-
-        return user
      

@@ -1,0 +1,36 @@
+{% extends 'accounts/base.html' %}
+
+{% block css %}
+
+    button:hover{
+        transform: scale(1.1);
+    }
+
+{% endblock %}
+
+
+{% block div %}
+
+<br> <br> <br> <br> <br> <br>
+
+<div class="jumbotron container bg-light" style="width:500px">
+    <div align='center'>
+    <h1 class = 'bg-info p-1'> Sign Up as</h1> <br>
+    
+    <form action="{% url 'accounts:signup' %}">
+    <button type="submit" class="btn btn-info text-body btn-lg" id="btn1">
+      Buyer
+    </button>
+    </form>
+  
+    <strong>OR</strong>
+
+    <form action="{% url 'accounts:signup' %}">
+    <button type="submit" class="btn btn-info text-body btn-lg" id="btn2">
+      Seller
+    </button>
+    </form>
+    </div>
+</div>
+
+{% endblock %}

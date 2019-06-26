@@ -10,16 +10,20 @@ def signup_view(request):
 
     global loggedin
 
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            loggedin = 'true'
-            login(request, user)
+    if loggedin is 'true':
             return redirect('accounts:login_index')
+
     else:
-        form = RegistrationForm()
-    return render(request,'accounts/signup.html',{'form':form})
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                loggedin = 'true'
+                login(request, user)
+                return redirect('accounts:login_index')
+        else:
+            form = RegistrationForm()
+        return render(request,'accounts/signup.html',{'form':form})
 
 def login_view(request):
         
@@ -32,7 +36,6 @@ def login_view(request):
             if request.method == 'POST':
                 form = LoginForm(data=request.POST)
                 if form.is_valid():
-                    #log the user in
                     user = form.get_user()
                     loggedin = 'true'
                     login(request, user)
@@ -63,5 +66,8 @@ def home(request):
 
     else:
         return render(request, 'accounts/homepage.html')
+
+def signup_options(request):
+    return render(request, 'accounts/options.html')
 
 # Create your views here.
