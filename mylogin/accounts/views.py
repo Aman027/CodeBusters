@@ -1,8 +1,19 @@
 from django.shortcuts import render, redirect
-from accounts.forms import BuyerRegistrationForm, SellerRegistrationForm, LoginForm
+from accounts.forms import(
+    BuyerRegistrationForm,
+    SellerRegistrationForm,
+    LoginForm,
+    EditProfileForm
+)
 from django.http import HttpResponse
-from django.contrib.auth import login,logout,authenticate
+from django.contrib.auth import(
+    login,
+    logout,
+    authenticate,
+    update_session_auth_hash
+)
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 
 loggedin = 'false'
 
@@ -23,7 +34,7 @@ def buyer_signup_view(request):
                 return redirect('accounts:login_index')
         else:
             form = BuyerRegistrationForm()
-        return render(request,'accounts/signup.html',{'form':form})
+        return render(request,'accounts/buyersignup.html',{'form':form})
 
 
 def seller_signup_view(request):
@@ -68,6 +79,17 @@ def login_view(request):
 
 def my_profile(request):
     return render(request, 'accounts/myprofile.html',{'user':request.user})
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:my_profile')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+    return render(request, 'accounts/editprofile.html',{'form':form})
     
 
 
@@ -93,5 +115,18 @@ def home(request):
 
 def signup_options(request):
     return render(request, 'accounts/options.html')
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('accounts:my_profile')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, 'accounts/changepassword.html',{'form':form})
+
 
 # Create your views here.

@@ -12,4 +12,6 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('options/', views.signup_options,name="signup_options"),
     path('myprofile/',views.my_profile,name="my_profile"),
+    path('myprofile/edit/',views.edit_profile,name="edit_profile"),
+    path('myprofile/password/',views.change_password,name="change_password"),
 ]
