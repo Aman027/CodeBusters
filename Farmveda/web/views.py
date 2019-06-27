@@ -70,16 +70,20 @@ def login_view(request):
                     user = form.get_user()
                     loggedin = 'true'
                     login(request, user)
-                    return redirect('web:login_index') 
+                    if 'next' in request.POST:
+                        return redirect(request.POST.get('next'))
+                    else:
+                        return redirect('web:login_index') 
 
             else:
                 form = LoginForm()
             return render(request, 'web/login.html', {'form':form})
 
-
+@login_required(login_url='/web/login/')
 def my_profile(request):
     return render(request, 'web/myprofile.html',{'user':request.user})
 
+@login_required(login_url='/web/login/')
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(data=request.POST, instance=request.user)
@@ -97,6 +101,7 @@ def edit_profile(request):
 def login_index(request):
     return render(request, 'web/loggedin.html')
 
+@login_required(login_url='/web/login/')
 def logout_view(request):
     global loggedin
     if request.method == 'POST':
@@ -116,6 +121,7 @@ def home(request):
 def signup_options(request):
     return render(request, 'web/options.html')
 
+@login_required(login_url='/web/login/')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
