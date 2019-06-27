@@ -27,11 +27,14 @@
 <br>
 <br><br><br><br>
 
-<div class="container jumbotron">
-    <form action="" method="post">
+<div class="container jumbotron bg-light" style="width:500px">
+<h1 class="bg-info p-1" align="center">Edit Profile</h1> <br>
+    <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <button type="submit">Submit</button>
+        <div align="center">
+        <button type="submit" class="btn btn-info">Submit</button>
+        </div>
     </form>
 </div>
 

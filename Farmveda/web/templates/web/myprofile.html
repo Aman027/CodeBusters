@@ -27,6 +27,12 @@
 <br>
 <br><br><br><br><br><br><br>
 
+<div class = "jumbotron container bg-light" style="width:500px">
+
+<h1 class="bg-info p-1" align="center">Your Profile</h1>
+
+<br>
+
 <ul>
     <li>Username: {{user}}</li>
     <li>First Name: {{user.first_name}}</li>
@@ -34,20 +40,21 @@
     <li>Email: {{user.email}}</li>
     <!-- <li>Phone: {{user.phone}}</li>    not working-->   
     <br>
-
+    <div align="center">
     <form action="{% url 'web:edit_profile' %}">
     <button type="submit" class="btn btn-info">
-        edit_profile
+        Edit Profile
     </button>
-    </form>
+    </form> 
     <br>
     <form action="{% url 'web:change_password' %}">
     <button tyoe="submit" class="btn btn-info">
-        reset_password
+        Change Password
     </button>
     </form>
-    </ul>
+</ul>
 
+</div>
 
 {% endblock %}
 
