@@ -20,7 +20,7 @@ class Product(models.Model):
     name = models.CharField(max_length = 50)
     category = models.CharField(max_length = 25)
     price = models.IntegerField(blank=True)
-    seller = models.ForeignKey(Seller, on_delete = models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete = models.CASCADE, blank = True)
     #flag to differentiate crawled data from signed up data
     crawled = models.BooleanField(default=False)    
     rating = models.FloatField(default=0)
