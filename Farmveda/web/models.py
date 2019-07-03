@@ -8,11 +8,11 @@ class User(AbstractUser):
 
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
-    name = models.CharField(max_length = 50)
+    #first_name = models.CharField(max_length = 50)
     #password = models.CharField(max_length = 15)
-    contact_no = models.CharField(max_length = 12, blank = True)   #To be changed to false
-    email_id = models.CharField(max_length = 20, blank = True)
-    website = models.CharField(max_length = 50, blank = True)
+    #phone = models.CharField(max_length = 12, blank = True)   #To be changed to false
+    #email = models.CharField(max_length = 20, blank = True)
+    #website = models.CharField(max_length = 50, blank = True)
     #rating = 
 
 
@@ -20,7 +20,7 @@ class Product(models.Model):
     name = models.CharField(max_length = 50)
     category = models.CharField(max_length = 25)
     price = models.IntegerField(blank=True)
-    seller = models.ForeignKey(Seller, on_delete = models.CASCADE, blank = True)
+    seller = models.ForeignKey(Seller, on_delete = models.CASCADE, related_name='products')
     #flag to differentiate crawled data from signed up data
     crawled = models.BooleanField(default=False)    
     rating = models.FloatField(default=0)
@@ -30,10 +30,10 @@ class Product(models.Model):
 
 class Buyer(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key = True)
-    name = models.CharField(max_length = 50)
+    #name = models.CharField(max_length = 50)
     #password = models.CharField(max_length = 15)
-    contact_no = models.CharField(max_length = 12, blank = True)   #To be changed to false
-    email_id = models.CharField(max_length = 20, blank = True)
+    #phone = models.CharField(max_length = 12, blank = True)   #To be changed to false
+    #email = models.CharField(max_length = 20, blank = True)
     product = models.ManyToManyField(Product)
     #feedback
     #wishlist
