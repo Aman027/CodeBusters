@@ -1,6 +1,8 @@
 from django import forms
 #from django.contrib.auth.models import User
 from .models import *
+from  .models import Product
+
 from django.contrib.auth.forms import(
     UserCreationForm,
     AuthenticationForm,
@@ -101,3 +103,24 @@ class EditProfileForm(UserChangeForm):
             'last_name',
             'email'
         )
+class ProductForm(forms.ModelForm):
+    name       = forms.CharField( 
+                    widget=forms.TextInput(attrs={"placeholder": "Your Product Name"}))
+    category   = forms.CharField(
+                         
+                        widget=forms.TextInput(
+                                attrs={
+                                    "placeholder": "Your product category",
+                                    "class": "new-class-name two",
+                                    "id": "my-id-for-textarea",
+                                    "rows": 20,
+                                    'cols': 120
+                                }
+                            )
+                        )
+    price       = forms.DecimalField(initial=0.99)
+    class Meta:
+        model= Product
+        fields = [
+            'name','category','price','quantity','seller'
+        ]

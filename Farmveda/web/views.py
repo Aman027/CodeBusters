@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from .forms import ProductForm
+from .models import Product
 from web.forms import(
     BuyerRegistrationForm,
     SellerRegistrationForm,
@@ -134,5 +136,11 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
     return render(request, 'web/changepassword.html',{'form':form})
 
-
+def product_create_view(request):
+    form =ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('web:product_create_view')
+    return render(request, "web/product_create.html",{'form':form})
+    
 # Create your views here.

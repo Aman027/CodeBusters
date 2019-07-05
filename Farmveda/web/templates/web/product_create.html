@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block css %}
+
+
+    #as{
+        max-width: 450px;
+        background: #FAFAFA;
+        padding: 30px;
+        margin: 50px auto;
+        box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+        border-radius: 10px;
+        border: 6px solid #305A72;
+    }
+
+{% endblock %}
+{% block div %}
+
+<br><br><br><br>
+<div id="as" class="dipov" align="center">
+    <h2 class="bg-info p-1">
+        Add Details of Your PRODUCT
+    </h2> <br> <br>
+<form action='.' method='POST'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit' value='Save'/>
+</div>
+</form>
+
+
+
+
+{% endblock %}

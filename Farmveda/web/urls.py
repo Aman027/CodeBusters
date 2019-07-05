@@ -16,4 +16,5 @@ urlpatterns = [
     path('myprofile/edit/',views.edit_profile,name="edit_profile"),
     path('myprofile/password/',views.change_password,name="change_password"),
     path('search/',include('haystack.urls')),
+    path('create/',views.product_create_view,name='product_create_view'),
 ]
