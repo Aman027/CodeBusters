@@ -18,4 +18,5 @@ urlpatterns = [
     path('search/',include('haystack.urls')),
     path('create/',views.product_create_view,name='product_create_view'),
     path('product/(?P<pk>\d+)/',views.product,name="product"),
+    path('search_product/(?P<pk>\d+)/',views.search_product, name="search_product"),
 ]
