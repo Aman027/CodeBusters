@@ -9,7 +9,6 @@
 # import mysql.connector
 import sqlite3
 
-
 class QuotetutorialPipeline(object):
 
     def __init__(self):
@@ -17,7 +16,7 @@ class QuotetutorialPipeline(object):
         self.create_table()
 
     def create_connection(self):
-        self.conn = sqlite3.connect("myquotes.db")
+        self.conn = sqlite3.connect("myFarmitems.db")
         self.curr = self.conn.cursor()
 
         # self.conn = mysql.connector.connect(
@@ -29,23 +28,26 @@ class QuotetutorialPipeline(object):
 
 
     def create_table(self):
-        self.curr.execute("""DROP TABLE IF EXISTS quotes_tb""")
-        self.curr.execute("""create table quotes_tb(
-                            title text,
-                            author text,
-                            tag text
+        self.curr.execute("""DROP TABLE IF EXISTS items_tb""")
+        self.curr.execute("""create table items_tb(
+                            name text,
+                            price text,
+                            link text
                             )""")
 
     def process_item(self, item, spider):
         self.store_db(item)
+        print(Seller.user.first())
         return item
 
     def store_db(self, item):
-        self.curr.execute("""insert into quotes_tb values (?,?,?)""", (
-            item['title'][0],
-            item['author'][0],
-            item['tag'][0]
-        ))
+        item_length = 20
+        for i in range(0, item_length):
+            self.curr.execute("""insert into items_tb values (?,?,?)""", (
+                item['name'][i],
+                item['price'][i],
+                item['link'][i]
+            ))
 
         self.conn.commit()
 #foreign key to store multiple tags??????
