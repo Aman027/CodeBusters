@@ -36,15 +36,8 @@
 {% block div %}
 
 <br><br><br><br>
-<h3>Your products are:</h3>
-<ul>
-    {% for product in user.products.all %}
-    <form action="{% url 'web:product' pk=product.pk %}">
-    {% csrf_token %}
-        <li><button type="submit">{{product.name}}</button></li>
-    </form>
-    
-    {% endfor %}
-</ul>
+<h6>Product name: {{product.name}}</h6>
+<h6>Product category: {{product.category}}</h6>
+<h6>Product price: {{product.price}}</h6>
 
 {% endblock %}

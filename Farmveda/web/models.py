@@ -16,16 +16,20 @@ class Seller(models.Model):
     #rating = 
 
 
+
 class Product(models.Model):
     name = models.CharField(max_length = 50)
     category = models.CharField(max_length = 25)
     price = models.IntegerField(blank=True)
-    seller = models.ForeignKey(Seller, on_delete = models.CASCADE, related_name='products')
+    seller = models.ForeignKey(User, on_delete = models.CASCADE, related_name='products')
     #flag to differentiate crawled data from signed up data
     crawled = models.BooleanField(default=False)    
     rating = models.FloatField(default=0)
     quantity = models.CharField(max_length = 50)
     #feedback = models.OneToOneField(Feedback)
+
+    def __str__(self):
+        return self.name
 
 
 class Buyer(models.Model):

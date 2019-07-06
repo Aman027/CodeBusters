@@ -137,10 +137,19 @@ def change_password(request):
     return render(request, 'web/changepassword.html',{'form':form})
 
 def product_create_view(request):
-    form =ProductForm(request.POST or None)
+    form = ProductForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('web:product_create_view')
     return render(request, "web/product_create.html",{'form':form})
+
+def product(request,pk):
+    user = request.user
+    product = user.products.get(pk=pk)
+    return render(request, 'web/productdetails.html',
+        {   'user': request.user,
+            'product':user.products.get(pk=pk),
+        })
+
     
 # Create your views here.
