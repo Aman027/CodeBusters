@@ -41,7 +41,6 @@
     {% for product in user.products.all %}
     <form action="{% url 'web:product' pk=product.pk %}">
     {% csrf_token %}
-        <li>{{product.pk}}</li>
         <li><button type="submit">{{product.name}}</button></li>
     </form>
     

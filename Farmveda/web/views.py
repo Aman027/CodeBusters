@@ -153,7 +153,6 @@ def product(request,pk):
 
 def search_product(request, pk):
     product = Product.objects.get(pk=pk)
-    print(product.pk)
     return render(request, 'web/productdetails.html',
         {   'product':Product.objects.get(pk=pk),
         })
