@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import ProductForm
 from .models import Product
 from web.forms import(
     BuyerRegistrationForm,
     SellerRegistrationForm,
     LoginForm,
-    EditProfileForm
+    EditProfileForm,
+    ProductForm
 )
 from django.http import HttpResponse
 from django.contrib.auth import(
@@ -136,12 +136,18 @@ def change_password(request):
         form = PasswordChangeForm(user=request.user)
     return render(request, 'web/changepassword.html',{'form':form})
 
+@login_required(login_url='/web/login/')
 def product_create_view(request):
-    form = ProductForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('web:product_create_view')
-    return render(request, "web/product_create.html",{'form':form})
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.seller = request.user
+            product.save()
+            return redirect('web:product_create_view')
+    else:
+        form = ProductForm()
+        return render(request, "web/product_create.html",{'form':form})
 
 def product(request,pk):
     user = request.user
