@@ -1,5 +1,5 @@
 from django import forms
-#from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from .models import *
 from django.contrib.auth.forms import(
     UserCreationForm,
@@ -77,20 +77,15 @@ class SellerRegistrationForm(UserCreationForm):
         return user
 
 class LoginForm(AuthenticationForm):
-    # CHOICES=[('buyer','As a Buyer'),
-    #      ('seller','As a Seller')]
-
-    # login_as = forms.ChoiceField(label="How do you want to Login?",choices=CHOICES, widget=forms.RadioSelect)
 
     class Meta:
         model = User
         fields = (
             'username',
             'password',
-            # 'login_as',
         )
      
-class EditProfileForm(UserChangeForm):
+class BuyerEditProfileForm(UserChangeForm):
 
     password = None
 
@@ -100,6 +95,18 @@ class EditProfileForm(UserChangeForm):
             'first_name',
             'last_name',
             'email'
+        )
+
+class SellerEditProfileForm(UserChangeForm):
+
+    password = None
+
+    class Meta:
+        model = User
+        fields = (
+            # 'firm_name',
+            # 'website',
+            'email',
         )
 
 class ProductForm(forms.ModelForm):

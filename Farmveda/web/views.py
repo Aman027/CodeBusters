@@ -4,7 +4,8 @@ from web.forms import(
     BuyerRegistrationForm,
     SellerRegistrationForm,
     LoginForm,
-    EditProfileForm,
+    BuyerEditProfileForm,
+    SellerEditProfileForm,
     ProductForm
 )
 from django.http import HttpResponse
@@ -87,21 +88,37 @@ def my_profile(request):
 
 @login_required(login_url='/web/login/')
 def edit_profile(request):
-    if request.method == 'POST':
-        form = EditProfileForm(data=request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('web:my_profile')
+
+    if request.user.is_buyer is True:
+        if request.method == 'POST':
+            form = BuyerEditProfileForm(data=request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('web:my_profile')
+
+        else:
+            form = BuyerEditProfileForm(instance=request.user)
+        return render(request, 'web/editprofile.html',{'form':form})
 
     else:
-        form = EditProfileForm(instance=request.user)
-    return render(request, 'web/editprofile.html',{'form':form})
+        if request.method == 'POST':
+            form = SellerEditProfileForm(data=request.POST, instance=request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('web:my_profile')
+
+        else:
+            form = SellerEditProfileForm(instance=request.user)
+        return render(request, 'web/editprofile.html',{'form':form})
     
 
 
 @login_required(login_url='/web/login/')
 def login_index(request):
-    return render(request, 'web/loggedin.html')
+    if request.user.is_seller is True:
+        return render(request, 'web/seller_loggedin.html')
+    else:
+        return render(request, 'web/buyer_loggedin.html')
 
 @login_required(login_url='/web/login/')
 def logout_view(request):

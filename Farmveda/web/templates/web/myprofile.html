@@ -33,6 +33,8 @@
 
 <br>
 
+{% if user.is_buyer is True %}
+
 <ul>
     <li>Username: {{user}}</li>
     <li>First Name: {{user.first_name}}</li>
@@ -53,6 +55,33 @@
     </button>
     </form>
 </ul>
+
+{% endif %}
+
+{% if user.is_seller is True %}
+
+<ul>
+    <li>Username: {{user}}</li>
+    <li>Firm Name: {{user.firm_name}}</li>
+    <li>Website: {{user.website}}</li>
+    <li>Email: {{user.email}}</li>
+    <!-- <li>Phone: {{user.phone}}</li>    not working-->   
+    <br>
+    <div align="center">
+    <form action="{% url 'web:edit_profile' %}">
+    <button type="submit" class="btn btn-info">
+        Edit Profile
+    </button>
+    </form> 
+    <br>
+    <form action="{% url 'web:change_password' %}">
+    <button tyoe="submit" class="btn btn-info">
+        Change Password
+    </button>
+    </form>
+</ul>
+
+{% endif %}
 
 </div>
 
