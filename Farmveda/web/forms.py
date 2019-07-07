@@ -1,9 +1,6 @@
 from django import forms
 #from django.contrib.auth.models import User
 from .models import *
-# from  .models import Product
-# from .models import User, Seller, Buyer
-
 from django.contrib.auth.forms import(
     UserCreationForm,
     AuthenticationForm,
@@ -106,10 +103,10 @@ class EditProfileForm(UserChangeForm):
         )
 
 class ProductForm(forms.ModelForm):
-    name     = forms.CharField( 
+    name     = forms.CharField(required=True,
                     widget=forms.TextInput(attrs={"placeholder": "Your Product Name"}))
     category = forms.CharField(
-                         
+                         required=True,
                         widget=forms.TextInput(
                                 attrs={
                                     "placeholder": "Your product category",
@@ -120,8 +117,8 @@ class ProductForm(forms.ModelForm):
                                 }
                             )
                         )
-    price    = forms.CharField(validators=[RegexValidator(r'^\d{1,10}$')])
-    quantity = forms.CharField(validators=[RegexValidator(r'^\d{1,10}$')])
+    price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
 
     class Meta:
         model = Product

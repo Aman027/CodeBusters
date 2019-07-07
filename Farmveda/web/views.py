@@ -147,7 +147,7 @@ def product_create_view(request):
             return redirect('web:product_create_view')
     else:
         form = ProductForm()
-        return render(request, "web/product_create.html",{'form':form})
+    return render(request, "web/product_create.html",{'form':form})
 
 def product(request,pk):
     user = request.user
