@@ -57,6 +57,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="contents">
+            {% if not user.is_seller is True %}
             <form class="form-inline">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -69,12 +70,16 @@
                             <a class="dropdown-item" href="#">Link 3</a>
                         </div>
                     </div>
+
                     <input type="text" class="form-control" placeholder="What are you searching for?">
+                    
+
                     <button type="submit" class="btn btn-light ml-sm-2" id="go">
                         <span class="fas fa-search"></span> Go
                     </button>
                 </div>
             </form>
+            {% endif %}
             {% block body %}
             {% endblock %}
             </div>
