@@ -130,3 +130,10 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = [
             'name','category','price','quantity','image']
+            
+class CommentForm(forms.ModelForm):  
+    content = forms.CharField(required=True)
+
+    class Meta:
+        model = Comment
+        fields = ('content',)

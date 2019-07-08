@@ -6,7 +6,8 @@ from web.forms import(
     LoginForm,
     BuyerEditProfileForm,
     SellerEditProfileForm,
-    ProductForm
+    ProductForm,
+    CommentForm
 )
 from django.http import HttpResponse
 from django.contrib.auth import(
@@ -177,11 +178,26 @@ def product(request,pk):
             'product':user.products.get(pk=pk),
         })
 
+@login_required(login_url='/web/login/')
 def search_product(request, pk):
     product = Product.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.item = product
+            comment.save()
+            request.session['temp_data'] = form.cleaned_data
+    else:
+        form = CommentForm()
     return render(request, 'web/productdetails.html',
-        {   'product':Product.objects.get(pk=pk),
-        })
+        {'product':Product.objects.get(pk=pk),'form':form})
+
+# def product_in_category(request, pk):
+#     category = Category.objetcs.get(pk=pk)
+#     return render(request, 'web/category_wise.html',{'category':Category.objetcs.get(pk=pk)})
+    
 
     
 # Create your views here.

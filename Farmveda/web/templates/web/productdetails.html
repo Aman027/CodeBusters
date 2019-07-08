@@ -44,6 +44,22 @@
     <h6>Product name: {{product.name}}</h6>
     <h6>Product category: {{product.category}}</h6>
     <h6>Product price: {{product.price}}</h6>
+    <div>
+            <h2>Comments</h2>
+            {% for comment in product.comment_set.all %}
+            <ul>
+                <li>{{ comment.content }} - via {{ comment.user }} on {{comment.timestamp}}</li>
+            </ul>
+            {% endfor %}
+            {% if not user.is_seller is True %}
+            <h2>Add Comments</h2>
+            <form action='.' method='POST'>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type='submit' value='Save'/>
+            </form>
+            {% endif %}
+        </div>
 </div>
 
 {% endblock %}

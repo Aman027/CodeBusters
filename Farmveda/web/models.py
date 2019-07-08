@@ -15,11 +15,13 @@ class Seller(models.Model):
     #website = models.CharField(max_length = 50, blank = True)
     #rating = 
 
-
+# class Category(models.Model):
+#     name = models.CharField(max_length = 50)
 
 class Product(models.Model):
     name = models.CharField(max_length = 50)
     category = models.CharField(max_length = 25)
+    #category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name='products')
     price = models.IntegerField(blank=True)
     image = models.FileField()
     seller = models.ForeignKey(User, on_delete = models.CASCADE, related_name='products')
@@ -42,5 +44,14 @@ class Buyer(models.Model):
     product = models.ManyToManyField(Product)
     #feedback
     #wishlist
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
+    item = models.ForeignKey(Product, on_delete = models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return str(self.user.username)
 
 
