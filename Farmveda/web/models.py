@@ -9,15 +9,8 @@ class User(AbstractUser):
     firm_name = models.CharField(max_length=100,default='')
     website = models.URLField(max_length=100,default='')
 
-
-
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE , primary_key = True)
-    #first_name = models.CharField(max_length = 50)
-    #password = models.CharField(max_length = 15)
-    #phone = models.CharField(max_length = 12, blank = True)   #To be changed to false
-    #email = models.CharField(max_length = 20, blank = True)
-    #website = models.CharField(max_length = 50, blank = True)
     #rating = 
 
 # class Category(models.Model):
@@ -34,7 +27,6 @@ class Product(models.Model):
     crawled = models.BooleanField(default=False)    
     rating = models.FloatField(default=0)
     quantity = models.CharField(max_length = 50)
-    #feedback = models.OneToOneField(Feedback)
 
     def __str__(self):
         return self.name
@@ -42,13 +34,8 @@ class Product(models.Model):
 
 class Buyer(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE, primary_key = True)
-    #name = models.CharField(max_length = 50)
-    #password = models.CharField(max_length = 15)
-    #phone = models.CharField(max_length = 12, blank = True)   #To be changed to false
-    #email = models.CharField(max_length = 20, blank = True)
-    product = models.ManyToManyField(Product)
-    #feedback
-    #wishlist
+    wishlist = models.ManyToManyField(Product)
+
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
@@ -58,5 +45,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.user.username)
-
-

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Buyer, Seller, Comment
 from web.forms import(
     BuyerRegistrationForm,
     SellerRegistrationForm,
@@ -177,6 +177,16 @@ def product(request,pk):
         {   'user': request.user,
             'product':user.products.get(pk=pk),
         })
+
+@login_required(login_url='/web/login/')
+def add_to_wishlist(request, pk):
+    user = request.user
+    buyer = Buyer.objects.get(user=request.user)
+    print(buyer)
+    product = Product.objects.get(pk = pk)
+    print(product)
+    buyer.wishlist.add(product)
+    return render(request, 'web/productdetails.html', {'product':Product.objects.get(pk=pk)})
 
 @login_required(login_url='/web/login/')
 def search_product(request, pk):

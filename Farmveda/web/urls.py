@@ -19,6 +19,7 @@ urlpatterns = [
     path('search/',include('haystack.urls')),
     path('create/',views.product_create_view,name='product_create_view'),
     path('product/(?P<pk>\d+)/',views.product,name="product"),
+    path('add-wishlist/(?P<pk>\d+)/',views.add_to_wishlist,name="add-wishlist"),
     path('search_product/(?P<pk>\d+)/',views.search_product, name="search_product"),
     path('password-reset/',auth_views.PasswordResetView.as_view(
         template_name='web/password_reset.html',
