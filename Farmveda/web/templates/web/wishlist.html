@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block css %}
+
+    button:hover{
+        transform: scale(1.1);
+        box-shadow: 5px 5px 5px black;
+    }
+
+{% endblock %}
+
+{% block div %}
+
+<br><br><br><br>
+<h3>Your products are:</h3>
+<ul>
+    {% for product in buyer.wishlist.all %}
+    <div style="border: 2px solid grey; border-radius: 5px;background-color: azure">
+        <h6>{{product.name}}</h6>
+        {% if product.image %}
+        <img src="{{product.image.url}}"  height="200" width="200">
+        {% endif %}
+        <h6>Product category: {{product.category}}</h6>
+        <h6>Product price: {{product.price}}</h6>
+    </div>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}

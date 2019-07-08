@@ -178,13 +178,19 @@ def product(request,pk):
             'product':user.products.get(pk=pk),
         })
 
+
+@login_required(login_url='/web/login/')
+def view_wishlist(request):
+    user = request.user
+    buyer = Buyer.objects.get(user=request.user)
+    return render(request, 'web/wishlist.html',{'buyer': buyer})
+
+
 @login_required(login_url='/web/login/')
 def add_to_wishlist(request, pk):
     user = request.user
     buyer = Buyer.objects.get(user=request.user)
-    print(buyer)
     product = Product.objects.get(pk = pk)
-    print(product)
     buyer.wishlist.add(product)
     return render(request, 'web/productdetails.html', {'product':Product.objects.get(pk=pk)})
 
