@@ -10,5 +10,5 @@ Phone , Firm Name and Website are not working properly
 To run local mail server:
 
 ```
-python -m smtpd -n -c DebuggingServer localhost:1025
+python3 -m smtpd -n -c DebuggingServer localhost:1025
 ```
