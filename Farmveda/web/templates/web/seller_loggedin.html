@@ -45,16 +45,16 @@
 
 {% block div %}
 
-<br><br><br><br>
-<h3>Your products are:</h3>
-<ul>
+<br><br><br><br> <br>
+<div class = " jumbotron container bg-light" style="width:500px" align='center'>
+<h1 class="bg-info p-1">Your Products</h1> <br>
     {% for product in user.products.all %}
     <form action="{% url 'web:product' pk=product.pk %}">
     {% csrf_token %}
-        <li><button type="submit">{{product.name}}</button></li>
+        <button type="submit" class="btn btn-success text-body btn-lg">{{product.name}}</button>
     </form>
     <br>    
     {% endfor %}
-</ul>
+</div>
 
 {% endblock %}

@@ -12,6 +12,11 @@
         border: 6px solid #305A72;
     }
 
+    button:hover{
+        transform: scale(1.1);
+        box-shadow: 5px 5px 5px black;
+    }
+
 {% endblock %}
 
 {% block body %}
@@ -49,7 +54,9 @@
 <form action='.' method='POST' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type='submit' value='Save'/>
+    <button type="submit" class="btn btn-info text-body btn-lg">
+        <span class="fas fa-save"></span> Save
+    </button>
 </div>
 </form>
 

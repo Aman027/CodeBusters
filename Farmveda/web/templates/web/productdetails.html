@@ -29,38 +29,59 @@
             </button>
             </form>
         </li>
+
+        {% if not user.is_seller is True %}
+        <li class="nav-item mr-3 pt-1">
+            <form action="{% url 'web:wishlist' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-light btn-lg">
+                <span class="fas fa-sign-out-alt"></span>Wishlist
+            </button>
+            </form>
+        </li>
+        {% endif %}
 </ul>
 
 {% endblock %}
 
 {% block div %}
 
-<br><br><br><br>
-<div class="container">
+<br><br><br><br><br><br>
+<div class="jumbotron container bg-light" align="center" style="width:500px">
+    <h1 class="bg-info p-1" align="center">{{product.name}}</h1>
+    <br>
     {% if product.image %}
         <img src="{{product.image.url}}"  height="200" width="200">
         <br><br>
     {% endif %}
-    <h6>Product name: {{product.name}}</h6>
-    <h6>Product category: {{product.category}}</h6>
-    <h6>Product price: {{product.price}}</h6>
+    <h4>Category: {{product.category}}</h4>
+    <h4>Price: {{product.price}}</h4> <br>
+    {% if not user.is_seller is True %}
     <form action = "{% url 'web:add-wishlist' pk=product.pk %}" method = 'POST'>
         {% csrf_token %}
-        <button>Add to wishlist</button>
+        <button class="btn btn-info text-body btn-lg">
+            <span class="fas fa-plus"></span> Add to Wishlist
+        </button>
     </form>
+    <br>
+    {% endif %} 
     <div>
-            <h2>Comments</h2>
+            <h2 align='left'>Reviews:</h2>
             {% for comment in product.comment_set.all %}
             <ul>
-                <li>{{ comment.content }} - via {{ comment.user }} on {{comment.timestamp}}</li>
+                <li> <h5 align='left'>{{ comment.content }}</h5> - <b><i> {{ comment.user }} </i></b> on {{comment.timestamp}}</li>
             </ul>
             {% endfor %}
             {% if not user.is_seller is True %}
-            <h2>Add Comments</h2>
+
+            <div style="border: 2px solid grey; border-radius: 5px;background-color: azure; width:400px ; height:200px" align="center" >
+            <h2 class="bg-info p-1">Give your Feedback</h2> <br>
             <form action='.' method='POST'>
                 {% csrf_token %}
                 {{ form.as_p }}
-                <input type='submit' value='Save'/>
+                <button class="btn btn-info text-body btn-lg">
+                    <span class="fas fa-plus"></span> Add
+                </button>
             </form>
             {% endif %}
         </div>
