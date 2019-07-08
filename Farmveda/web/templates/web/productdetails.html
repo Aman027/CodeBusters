@@ -36,8 +36,14 @@
 {% block div %}
 
 <br><br><br><br>
-<h6>Product name: {{product.name}}</h6>
-<h6>Product category: {{product.category}}</h6>
-<h6>Product price: {{product.price}}</h6>
+<div class="container">
+    {% if product.image %}
+        <img src="{{product.image.url}}"  height="200" width="200">
+        <br><br>
+    {% endif %}
+    <h6>Product name: {{product.name}}</h6>
+    <h6>Product category: {{product.category}}</h6>
+    <h6>Product price: {{product.price}}</h6>
+</div>
 
 {% endblock %}
