@@ -126,8 +126,7 @@ class ProductForm(forms.ModelForm):
                         )
     price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
     quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
-
     class Meta:
         model = Product
         fields = [
-            'name','category','price','quantity']
+            'name','category','price','quantity','image']

@@ -21,6 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length = 50)
     category = models.CharField(max_length = 25)
     price = models.IntegerField(blank=True)
+    image = models.FileField()
     seller = models.ForeignKey(User, on_delete = models.CASCADE, related_name='products')
     #flag to differentiate crawled data from signed up data
     crawled = models.BooleanField(default=False)    

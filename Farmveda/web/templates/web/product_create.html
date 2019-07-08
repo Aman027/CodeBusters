@@ -46,7 +46,7 @@
     <h2 class="bg-info p-1">
         Add Details of Your PRODUCT
     </h2> <br> <br>
-<form action='.' method='POST'>
+<form action='.' method='POST' enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type='submit' value='Save'/>

@@ -18,6 +18,8 @@ from django.contrib.auth import(
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 
+IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
+
 loggedin = 'false'
 
 def buyer_signup_view(request):
@@ -156,10 +158,11 @@ def change_password(request):
 @login_required(login_url='/web/login/')
 def product_create_view(request):
     if request.method == 'POST':
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST , request.FILES)
         if form.is_valid():
             product = form.save(commit=False)
             product.seller = request.user
+            product.image = request.FILES['image']
             product.save()
             return redirect('web:product_create_view')
     else:
