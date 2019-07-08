@@ -94,7 +94,8 @@ class BuyerEditProfileForm(UserChangeForm):
         fields = (
             'first_name',
             'last_name',
-            'email'
+            'email',
+            'phone'
         )
 
 class SellerEditProfileForm(UserChangeForm):
@@ -104,9 +105,10 @@ class SellerEditProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = (
-            # 'firm_name',
-            # 'website',
+            'firm_name',
+            'website',
             'email',
+            'phone'
         )
 
 class ProductForm(forms.ModelForm):
