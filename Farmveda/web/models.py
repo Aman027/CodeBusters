@@ -1,9 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
+
 class User(AbstractUser):
     is_seller = models.BooleanField(default=False)
     is_buyer = models.BooleanField(default=False)
+    phone = models.CharField(max_length=10, default='')
+    firm_name = models.CharField(max_length=100,default='')
+    website = models.URLField(max_length=100,default='')
+
 
 
 class Seller(models.Model):
