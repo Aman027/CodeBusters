@@ -195,6 +195,14 @@ def add_to_wishlist(request, pk):
     return render(request, 'web/productdetails.html', {'product':Product.objects.get(pk=pk)})
 
 @login_required(login_url='/web/login/')
+def remove_wishlist(request, pk):
+    user = request.user
+    buyer = Buyer.objects.get(user=request.user)
+    product = Product.objects.get(pk = pk)
+    buyer.wishlist.remove(product)
+    return render(request, 'web/wishlist.html', {'buyer': buyer})
+
+@login_required(login_url='/web/login/')
 def search_product(request, pk):
     product = Product.objects.get(pk=pk)
     if request.method == 'POST':
