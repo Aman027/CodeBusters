@@ -139,3 +139,15 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content',)
+
+class EditProductForm(forms.ModelForm):
+
+    price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
+
+    class Meta:
+        model = Product
+        fields = (
+            'price',
+            'quantity',
+        )

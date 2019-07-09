@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product, Buyer, Seller, Comment
+from .models import *
 from web.forms import(
     BuyerRegistrationForm,
     SellerRegistrationForm,
@@ -7,7 +7,8 @@ from web.forms import(
     BuyerEditProfileForm,
     SellerEditProfileForm,
     ProductForm,
-    CommentForm
+    CommentForm,
+    EditProductForm
 )
 from django.http import HttpResponse
 from django.contrib.auth import(
@@ -114,7 +115,26 @@ def edit_profile(request):
             form = SellerEditProfileForm(instance=request.user)
         return render(request, 'web/editprofile.html',{'form':form})
     
+def edit_details(request,pk):
+    user = request.user
+    product = user.products.get(pk=pk)
 
+    if request.method == 'POST':
+        form = EditProductForm(data=request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return render(request, 'web/productdetails.html',
+                         {'user': request.user,
+                          'product':user.products.get(pk=pk),
+                         })
+
+    else:
+        form = EditProductForm(instance=product)
+    return render(request, 'web/edit_details.html',
+                 {'user': request.user,
+                  'product':user.products.get(pk=pk),
+                  'form':form
+                 })
 
 @login_required(login_url='/web/login/')
 def login_index(request):
@@ -212,7 +232,7 @@ def search_product(request, pk):
             comment.user = request.user
             comment.item = product
             comment.save()
-            request.session['temp_data'] = form.cleaned_data
+            # request.session['temp_data'] = form.cleaned_data
     else:
         form = CommentForm()
     return render(request, 'web/productdetails.html',
