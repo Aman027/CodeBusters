@@ -45,7 +45,7 @@ class BuyerRegistrationForm(UserCreationForm):
 class SellerRegistrationForm(UserCreationForm):
     
     firm_name = forms.CharField(required=True,max_length=100)
-    website = forms.URLField(max_length=100)
+    website = forms.URLField(max_length=100, initial="https://www.")
     email = forms.EmailField(required=True)
     phone = forms.CharField(max_length=10, min_length=10, validators=[RegexValidator(r'^\d{1,10}$')])
     
