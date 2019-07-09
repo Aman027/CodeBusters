@@ -152,13 +152,15 @@ def logout_view(request):
         return redirect('web:home')
 
 def home(request):
+
+    categories = Category.objects.all()
     global loggedin
 
     if loggedin is 'true':
         return redirect('web:login_index')
 
     else:
-        return render(request, 'web/homepage.html')
+        return render(request, 'web/homepage.html',{'categories':categories})
 
 def signup_options(request):
     return render(request, 'web/options.html')
@@ -238,9 +240,9 @@ def search_product(request, pk):
     return render(request, 'web/productdetails.html',
         {'product':Product.objects.get(pk=pk),'form':form})
 
-# def product_in_category(request, pk):
-#     category = Category.objetcs.get(pk=pk)
-#     return render(request, 'web/category_wise.html',{'category':Category.objetcs.get(pk=pk)})
+def product_in_category(request, pk):
+    category = Category.objects.get(pk=pk)
+    return render(request, 'web/category_wise.html',{'category':Category.objects.get(pk=pk)})
     
 
     

@@ -114,18 +114,18 @@ class SellerEditProfileForm(UserChangeForm):
 class ProductForm(forms.ModelForm):
     name     = forms.CharField(required=True,
                     widget=forms.TextInput(attrs={"placeholder": "Your Product Name"}))
-    category = forms.CharField(
-                         required=True,
-                        widget=forms.TextInput(
-                                attrs={
-                                    "placeholder": "Your product category",
-                                    "class": "new-class-name two",
-                                    "id": "my-id-for-textarea",
-                                    "rows": 20,
-                                    'cols': 120
-                                }
-                            )
-                        )
+    # category = forms.CharField(
+    #                      required=True,
+    #                     widget=forms.TextInput(
+    #                             attrs={
+    #                                 "placeholder": "Your product category",
+    #                                 "class": "new-class-name two",
+    #                                 "id": "my-id-for-textarea",
+    #                                 "rows": 20,
+    #                                 'cols': 120
+    #                             }
+    #                         )
+    #                     )
     price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
     quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
     class Meta:

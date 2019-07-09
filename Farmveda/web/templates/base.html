@@ -65,16 +65,9 @@
                             Categories                            
                         </button>
                         <div class="dropdown-menu">
-                            <!-- {% for category in Category.objects.all %}
-                            <form action="{% url 'web:product' pk=product.pk %}">
-                                {% csrf_token %}
-                                <a class="dropdown-item" href="{% url 'web:product_in_category' pk=category.pk %}">
-                                    {{ category.name }}</a>
-                            </form>
-                            {% endfor %} -->
-                            <a class="dropdown-item" href="#">Link 1</a>
-                            <a class="dropdown-item" href="#">Link 2</a>
-                            <a class="dropdown-item" href="#">Link 3</a>
+                            {% for category in categories %}
+                            <a class="dropdown-item" href="{% url 'web:product_in_category' pk=category.pk %}">{{category.name}}</a>
+                            {% endfor %}
                         </div>
                     </div>
 
