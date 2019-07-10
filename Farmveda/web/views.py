@@ -214,6 +214,8 @@ def add_to_wishlist(request, pk):
     buyer = Buyer.objects.get(user=request.user)
     product = Product.objects.get(pk = pk)
     buyer.wishlist.add(product)
+    if request.method == 'POST':
+        return render(request,'web/wishlist.html',{'buyer': buyer})
     return render(request, 'web/productdetails.html', {'product':Product.objects.get(pk=pk)})
 
 @login_required(login_url='/web/login/')
