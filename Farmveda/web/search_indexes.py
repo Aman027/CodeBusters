@@ -6,7 +6,7 @@ from web.models import Product, Seller
 class ProductIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     #seller = indexes.ForeignKey(Seller)
-    category = indexes.CharField(model_attr = 'category')
+    category = indexes.CharField(model_attr = 'category', null = True)
 
     def get_model(self):
         return Product
