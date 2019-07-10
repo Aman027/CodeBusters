@@ -23,14 +23,15 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length = 50)
     # category = models.CharField(max_length = 25)
-    category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name='products')
-    price = models.IntegerField(blank=True)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE, related_name='products', null= True)
+    price = models.CharField(max_length = 45, null = True)
     image = models.FileField()
-    seller = models.ForeignKey(User, on_delete = models.CASCADE, related_name='products')
+    seller = models.ForeignKey(User, on_delete = models.CASCADE, related_name='products', null = True)
     #flag to differentiate crawled data from signed up data
     crawled = models.BooleanField(default=False)    
     rating = models.FloatField(default=0)
     quantity = models.CharField(max_length = 50)
+    link = models.CharField(max_length = 80, null = True )
 
     def __str__(self):
         return self.name
