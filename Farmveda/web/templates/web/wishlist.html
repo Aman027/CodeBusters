@@ -40,11 +40,13 @@
 <h2 class="bg-info p-1">Your Wishlist</h2> <br>
 <ul>
     {% for product in buyer.wishlist.all %}
-    <div style="border: 2px solid grey; border-radius: 5px;background-color: azure; height:150px" align="center">
+    <div style="border: 2px solid grey; border-radius: 5px;background-color: azure; height:400px" align="center">
         <h4>{{product.name}}</h4>
+        <div style="border: 2px solid grey; border-radius: 5px;background-color : white; height:250px" align="center">
         {% if product.image %}
         <img src="{{product.image.url}}"  height="200" width="200">
         {% endif %}
+        </div>
         <h6>Product category: {{product.category}}</h6>
         <h6>Product price: {{product.price}}</h6>
         <form action = "{% url 'web:remove-wishlist' pk=product.pk %}" method = 'POST'>
