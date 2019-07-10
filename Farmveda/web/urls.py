@@ -28,14 +28,14 @@ urlpatterns = [
         template_name='web/password_reset.html',
         email_template_name='web/reset_password_email.html'),
         name='password_reset'),
-    path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(
-        template_name='web/password_reset_done.html'),
-        name='password_reset_done'),
+    # path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(
+    #     template_name='web/password_reset_done.html'),
+    #     name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(
         template_name='web/password_reset_confirm.html'),
         name='password_reset_confirm'),
-    path('reset/done/',auth_views.PasswordResetCompleteView.as_view(
-        template_name='web/password_reset_complete.html'),
-        name='password_reset_complete'),
+    # path('reset/done/',auth_views.PasswordResetCompleteView.as_view(
+    #     template_name='web/password_reset_complete.html'),
+    #     name='password_reset_complete'),
     path('product_in_cat/(?P<pk>\d+)/',views.product_in_category, name="product_in_category"),
 ]
