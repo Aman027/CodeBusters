@@ -148,7 +148,8 @@ def login_index(request):
     if request.user.is_seller is True:
         return render(request, 'web/seller_loggedin.html')
     else:
-        return render(request, 'web/buyer_loggedin.html')
+        products = Product.objects.all()
+        return render(request, 'web/buyer_loggedin.html',{'products':products})
 
 @login_required(login_url='/web/login/')
 def logout_view(request):
