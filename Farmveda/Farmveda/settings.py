@@ -50,6 +50,7 @@ HAYSTACK_CONNECTIONS = {
         #'PATH': '/home/sakshi/mysite1/polls/templates/search/indexes',
     },
 }
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
