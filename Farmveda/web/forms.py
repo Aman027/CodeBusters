@@ -126,9 +126,9 @@ class ProductForm(forms.ModelForm):
     #                             }
     #                         )
     #                     )
-    price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
-    quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
-    image = forms.FileField()
+    price    = forms.CharField(required=True)
+    quantity = forms.CharField(required=True)
+    image = forms.FileField(required = False)
     class Meta:
         model = Product
         fields = [
@@ -143,8 +143,8 @@ class CommentForm(forms.ModelForm):
 
 class EditProductForm(forms.ModelForm):
 
-    price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
-    quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    price    = forms.CharField(required=True)
+    quantity = forms.CharField(required=True)
     image = forms.FileField(required = False)
 
     class Meta:

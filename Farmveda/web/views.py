@@ -191,7 +191,7 @@ def product_create_view(request):
         if form.is_valid():
             product = form.save(commit=False)
             product.seller = request.user
-            product.image = request.FILES['image']
+            product.image = request.FILES.get('image', None)
             product.save()
             return redirect('web:product_create_view')
     else:
