@@ -44,11 +44,36 @@
 
 {% block div %}
 <br><br><br><br>
-{% for product in category.products.all %}
+<div style="margin-left:10% ; margin-right:10%">
+<div class="card-columns">
+        {% for product in category.products.all %}
+        <div class="card border-dark">
+            {% if product.image %}
+            <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200" >
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">
+                    Seller: {{product.seller}}
+                    <br>
+                    Price: {{product.price}}
+                </p>
+                <!-- <form action="{% url 'web:search_product' pk=product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success text-body stretched-link">View Details</button>
+                </form> -->
+                <a href="{% url 'web:search_product' pk=product.pk %}" class="btn btn-success stretched-link" >View Details</a>
+        
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+          </div>
+<!-- {% for product in category.products.all %}
 <form action="{% url 'web:search_product' pk=product.pk %}">
         {% csrf_token %}
         <button type="submit" class="btn btn-success text-body btn-lg">{{product.name}}</button>
 </form>
 <br>
-{% endfor %}
+{% endfor %} -->
 {% endblock %}
