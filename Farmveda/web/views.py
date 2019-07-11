@@ -161,13 +161,14 @@ def logout_view(request):
 def home(request):
 
     categories = Category.objects.all()
+    products = Product.objects.all()
     global loggedin
 
     if loggedin is 'true':
         return redirect('web:login_index')
 
     else:
-        return render(request, 'web/homepage.html',{'categories':categories})
+        return render(request, 'web/homepage.html',{'categories':categories, 'products':products})
 
 def signup_options(request):
     return render(request, 'web/options.html')
