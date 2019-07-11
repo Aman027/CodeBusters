@@ -140,7 +140,7 @@ def edit_details(request,pk):
 def delete_product(request, pk):
     user = request.user
     product = user.products.get(pk = pk)
-    user.products.remove(product)
+    Product.objects.filter(pk=pk).delete()
     return render(request, 'web/seller_loggedin.html')
 
 @login_required(login_url='/web/login/')
@@ -195,7 +195,7 @@ def product_create_view(request):
             product.seller = request.user
             product.image = request.FILES.get('image', None)
             product.save()
-            return redirect('web:product_create_view')
+            return redirect('web:login_index')
     else:
         form = ProductForm()
     return render(request, "web/product_create.html",{'form':form})

@@ -12,7 +12,7 @@
 {% block body %}
 
 <ul class="nav navbar-nav ml-auto">
-
+        {% if not user.is_seller is True %}
         <li class="nav-item mr-3 pt-1">
                 <form action="http://localhost:8000/web/search/" method="post">
                 {% csrf_token %}
@@ -21,6 +21,7 @@
                 </button>
                 </form>
         </li>
+        {% endif %}
 
         <li class="nav-item mr-3 pt-1">
             <form action="{% url 'web:my_profile' %}">

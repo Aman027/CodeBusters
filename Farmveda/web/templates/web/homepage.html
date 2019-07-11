@@ -1,4 +1,6 @@
+
 {% extends 'base.html' %}
+{% load static %}
 
 {% block css %}
 
@@ -52,7 +54,10 @@
         <div class="card border-dark">
             {% if product.image %}
             <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200" >
+            {% else %}
+            <img class="card-img-top " src="{% static 'web/images/download.jpeg' %}" alt="Card image cap" height="200" >
             {% endif %}
+
             <div class="card-body">
                 <h5 class="card-title">{{product.name}}</h5>
                 <p class="card-text">
