@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block css %}
 
@@ -48,7 +49,7 @@
 {% block div %}
 
 <br><br><br><br> <br>
-<div class = " jumbotron container bg-light" style="width:500px" align='center'>
+<!-- <div class = " jumbotron container bg-light" style="width:500px" align='center'>
 <h1 class="bg-info p-1">Your Products</h1> <br>
     {% for product in user.products.all %}
     <form action="{% url 'web:product' pk=product.pk %}">
@@ -57,6 +58,35 @@
     </form>
     <br>    
     {% endfor %}
-</div>
+</div> -->
+
+<div style="margin-left:10% ; margin-right:10%">
+        <h1 class="bg-info p-1" align='center'>Your Products</h1> <br>
+        <!-- <div class="container" align="center"> -->
+        <div class="card-columns">
+                {% for product in user.products.all %}
+        <div class="card border-dark">
+            {% if product.image %}
+            <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200" >
+            {% else %}
+            <img class="card-img-top " src="{% static 'web/images/download.jpeg' %}" alt="Card image cap" height="200" >
+            {% endif %}
+
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <p class="card-text">
+                    Price: {{product.price}}
+                </p>
+                <!-- <form action="{% url 'web:search_product' pk=product.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success text-body stretched-link">View Details</button>
+                </form> -->
+                <a href="{% url 'web:product' pk=product.pk %}" class="btn btn-success stretched-link" >View Details</a>
+        
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+          </div> 
 
 {% endblock %}
