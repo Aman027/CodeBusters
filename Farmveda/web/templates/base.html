@@ -72,22 +72,22 @@
                         </div>
                     </div>
 
-                    <input type="text" class="form-control" placeholder="What are you searching for?">
+                    <!-- <input type="text" class="form-control" placeholder="What are you searching for?">
                     
                     <button type="submit" class="btn btn-light ml-sm-2" id="go">
                         <span class="fas fa-search"></span> Go
-                    </button>
+                    </button> -->
                 </div>
             </form>
-                 <p class="google">     &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   <div id="google_translate_element"></div> 
-                    <script type="text/javascript"> 
-                        function googleTranslateElementInit() { 
-                          new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); 
-                        } 
-                        </script> 
-                          
-                        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </p>
             {% endif %}
+            <p class="google">     &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   &nbsp   <div id="google_translate_element"></div> 
+                <script type="text/javascript"> 
+                    function googleTranslateElementInit() { 
+                      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); 
+                    } 
+                    </script> 
+                      
+                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> </p>
             {% block body %}
             {% endblock %}
             </div>

@@ -1,26 +1,140 @@
 {% extends 'base.html' %}
 
+{% block css %}
+
+    button:hover{
+        transform: scale(1.1);
+        box-shadow: 5px 5px 5px black;
+    }
+
+    .button {
+        display: block;
+        width: 250px;
+        height: auto;
+        background: green;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+    }
+
+{% endblock %}
+
+{% block body %}
+
+{% if user.is_buyer is True %}
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:my_profile' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+                <span class="fas fa-sign-out-alt"></span> profile
+        </button>
+        </form>
+    </li>
+
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+            <span class="fas fa-sign-out-alt"></span> Logout
+        </button>
+        </form>
+    </li>
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:wishlist' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+            <span class="fas fa-sign-out-alt"></span>Wishlist
+        </button>
+        </form>
+    </li>
+
+</ul>
+{% endif %}
+
+{% if user.is_seller is True %}
+<ul class="nav navbar-nav ml-auto">
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:my_profile' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+                <span class="fas fa-sign-out-alt"></span> profile
+        </button>
+        </form>
+    </li>
+
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:product_create_view' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+            <span class="fas fa-plus"></span> Add Products
+        </button>
+        </form>
+    </li>
+
+    <li class="nav-item mr-3 pt-1">
+        <form action="{% url 'web:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-light btn-lg">
+            <span class="fas fa-sign-out-alt"></span> Logout
+        </button>
+        </form>
+    </li>
+
+</ul>
+{% endif %}
+
+{% if not user.is_buyer is True %}
+{% if not user.is_seller is True %}
+<ul class="nav navbar-nav ml-auto">
+        <li class="nav-item mr-3 pt-1">
+            <form action="{% url 'web:login' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-light btn-lg">
+                <span class="fas fa-sign-in-alt"></span> Login
+            </button>
+            </form>
+        </li>
+        <li class="nav-item pt-1">
+            <form action="{% url 'web:signup_options' %}">
+            {% csrf_token %}    
+            <button type="submit" class="btn btn-light btn-lg">
+                <span class="fas fa-handshake"></span> SignUp
+            </button>
+            </form>
+        </li>
+</ul>
+{% endif %}
+{% endif %}
+
+{% endblock %}
+
 {% block div %}
 <br><br><br><br><br><br>
-    <h2>Search</h2>
+<div class = " jumbotron container bg-light" style="width:500px">
+    <h1 class="bg-info p-1" align="center">Find Your Product</h1> <br>
 
     <form method="get" action=".">
         <table>
             {{ form.as_table }}
             <tr>
                 <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Search">
+                <td align='center'>
+                    <button type="submit" class="btn btn-info text-body btn-lg">
+                        <span class="fas fa-search"></span> Search
+                   </button><br>
                 </td>
             </tr>
-        </table>
+        </table> <br>
 
         {% if query %}
-            <h3>Results</h3>
+            <h3>Results:</h3>
 
             {% for result in page.object_list %}
-                <p>
-                    <a href="{% url 'web:search_product' pk=result.object.pk %}">{{ result.object.name }}</a>
+                <p align = 'center'>
+                    <a class = "button" href="{% url 'web:search_product' pk=result.object.pk %}">{{ result.object.name }}</a> <br>
                 </p>
             {% empty %}
                 <p>No results found.</p>
@@ -36,5 +150,6 @@
             {# Show some example queries to run, maybe query syntax, something else? #}
         {% endif %}
     </form>
+</div>
 {% endblock %}
 

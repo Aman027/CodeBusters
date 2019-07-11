@@ -16,10 +16,19 @@
             <form action="{% url 'web:my_profile' %}">
             {% csrf_token %}
             <button type="submit" class="btn btn-light btn-lg">
-                    <span class="fas fa-sign-out-alt"></span> profile
+                    <span class="fas fa-user"></span> Profile
             </button>
             </form>
         </li>
+
+        <li class="nav-item mr-3 pt-1">
+                <form action="{% url 'web:wishlist' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-light btn-lg">
+                    <span class="fas fa-heart"></span>&nbspWishlist
+                </button>
+                </form>
+            </li>
 
         <li class="nav-item mr-3 pt-1">
             <form action="{% url 'web:logout' %}" method="post">
