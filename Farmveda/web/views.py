@@ -245,7 +245,7 @@ def search_product(request, pk):
             comment.item = product
             comment.save()
             form=CommentForm()
-            return HttpResponseRedirect("")
+            return HttpResponseRedirect(".")
             # request.session['temp_data'] = form.cleaned_data
     else:
         form = CommentForm()
