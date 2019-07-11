@@ -136,6 +136,12 @@ def edit_details(request,pk):
                   'form':form
                  })
 
+def delete_product(request, pk):
+    user = request.user
+    product = user.products.get(pk = pk)
+    user.products.remove(product)
+    return render(request, 'web/seller_loggedin.html')
+
 @login_required(login_url='/web/login/')
 def login_index(request):
     if request.user.is_seller is True:

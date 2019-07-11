@@ -145,10 +145,12 @@ class EditProductForm(forms.ModelForm):
 
     price    = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
     quantity = forms.CharField(required=True, validators=[RegexValidator(r'^\d{1,10}$')])
+    image = forms.FileField(required = False)
 
     class Meta:
         model = Product
         fields = (
             'price',
             'quantity',
+            'image',
         )

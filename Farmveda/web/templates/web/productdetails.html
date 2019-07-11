@@ -66,6 +66,13 @@
         </button>
     </form>
     <br>
+    <form action = "{% url 'web:delete_product' pk=product.pk %}" method = 'POST'>
+        {% csrf_token %}
+        <button class="btn btn-info text-body btn-lg">
+            <span class="fas fa-trash-alt"></span> Delete
+        </button>
+    </form>
+    <br>
     {% endif %}
 
     {% if not user.is_seller is True %}

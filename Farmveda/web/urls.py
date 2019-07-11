@@ -20,6 +20,7 @@ urlpatterns = [
     path('create/',views.product_create_view,name='product_create_view'),
     path('product/(?P<pk>\d+)/',views.product,name="product"),
     path('product/edit/(?P<pk>\d+)/',views.edit_details,name="edit_details"),
+    path('product/delete/(?P<pk>\d+)/',views.delete_product,name="delete_product"),
     path('wishlist/',views.view_wishlist,name="wishlist"),
     path('add-wishlist/(?P<pk>\d+)/',views.add_to_wishlist,name="add-wishlist"),
     path('remove-wishlist/(?P<pk>\d+)/',views.remove_wishlist,name="remove-wishlist"),
