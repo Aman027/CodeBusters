@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from .models import *
 from web.forms import(
     BuyerRegistrationForm,
@@ -235,6 +236,7 @@ def remove_wishlist(request, pk):
 @login_required(login_url='/web/login/')
 def search_product(request, pk):
     product = Product.objects.get(pk=pk)
+    form=CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -242,6 +244,8 @@ def search_product(request, pk):
             comment.user = request.user
             comment.item = product
             comment.save()
+            form=CommentForm()
+            return HttpResponseRedirect("")
             # request.session['temp_data'] = form.cleaned_data
     else:
         form = CommentForm()
