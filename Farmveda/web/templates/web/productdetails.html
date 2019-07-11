@@ -66,14 +66,17 @@
         <img src="{{product.image.url}}"  height="200" width="200">
         <br><br>
     {% endif %}
-    <h4>Category: {{product.category}}</h4>
-    <h4>Seller: {{product.seller}}</h4>
     <h4>Price: {{product.price}}</h4>
+    {% if product.crawled is True %}
+    <h4>Category: {{product.category}}</h4>
+    <h4>Website:</h4><a href="{{product.link}}">{{product.link}}</a><br>
+    {% else %}
     <h4>Quantity: {{product.quantity}}</h4>
-    <h4>Seller Website: {{product.seller.website}}</h4>
-    <h4>Seller Phone: {{product.seller.phone}}</h4>
+    <h4>Category: {{product.category}}</h4>
+    <h4>Contact: {{product.seller.phone}}</h4>
     <h4>Seller E-mail: {{product.seller.email}}</h4>
-    <br>
+    {% endif %}
+     <br>
 
     {% if not user.is_buyer is True %}
     <form action = "{% url 'web:edit_details' pk=product.pk %}" method = 'POST'>
