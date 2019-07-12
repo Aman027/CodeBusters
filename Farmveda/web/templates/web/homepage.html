@@ -9,6 +9,37 @@
         box-shadow: 5px 5px 5px black;
     }
 
+    #crd:hover{
+        opacity: 0.7;
+        background-color: grey;
+        transform: scale(1.04);
+    }
+
+    #crd:hover .middle{
+        opacity:1;
+    }
+
+    .middle{
+        opacity:0;
+        position: absolute;
+        left:0;
+        right:0;
+        top:40%;
+    }
+
+    .text{
+        font-size:40px;
+        color: white;
+    }
+
+    .card-text{
+        color:black;
+    }
+
+    .card-title{
+        color:black;
+    }
+
 {% endblock %}
 
 
@@ -46,17 +77,52 @@
 {% endblock %}
 
 {% block div %}
-<br><br><br><br>
+<br><br><br><br><br>
+<!-- <div class='jumbotron bg-dark'> -->
+<div id="demo" class="carousel slide" data-ride="carousel" data-interval='3000'>
+
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+      
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+          <div class="carousel-item active" align='center'>
+            <img src="{% static 'web/images/bulb.png' %}" style="height:600px; width:80% ">
+          </div>
+          <div class="carousel-item" align='center'>
+            <img src="{% static 'web/images/motivation.png' %}" style="height:600px; width:80%">
+          </div>
+          <div class="carousel-item" align='center'>
+            <img src="{% static 'web/images/objective.png' %}" style="height:600px; width:80%">
+          </div>
+        </div>
+      
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon icon-fire"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      
+      <!-- </div>  -->
+      </div><br><br><br>
+
 <div style="margin-left:10% ; margin-right:10%">
-        <!-- <div class="container" align="center"> -->
         <div class="card-columns">
         {% for product in products %}
-        <div class="card border-dark">
+        <a href="{% url 'web:search_product' pk=product.pk %}">
+        <div class="card border-dark" id="crd">
             {% if product.image %}
-            <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200" >
+            <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200">
             {% else %}
-            <img class="card-img-top " src="{% static 'web/images/download.jpeg' %}" alt="Card image cap" height="200" >
+            <img class="card-img-top" src="{% static 'web/images/download.jpeg' %}" alt="Card image cap" height="200" >
             {% endif %}
+            
 
             <div class="card-body">
                 <h5 class="card-title">{{product.name}}</h5>
@@ -65,14 +131,16 @@
                     <br>
                     Price: {{product.price}}
                 </p>
-                <!-- <form action="{% url 'web:search_product' pk=product.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-success text-body stretched-link">View Details</button>
-                </form> -->
-                <a href="{% url 'web:search_product' pk=product.pk %}" class="btn btn-success stretched-link" >View Details</a>
         
             </div>
+
+            <div class='middle'>
+                    <h1 class='text'>Click to Open</h1>
+            </div> 
+
           </div>
+          </a>
+        
           {% endfor %}
           </div>
           </div> 

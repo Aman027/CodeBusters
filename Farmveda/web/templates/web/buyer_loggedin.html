@@ -8,6 +8,37 @@
         box-shadow: 5px 5px 5px black;
     }
 
+    #crd:hover{
+        opacity: 0.7;
+        background-color: grey;
+        transform: scale(1.04);
+    }
+
+    #crd:hover .middle{
+        opacity:1;
+    }
+
+    .middle{
+        opacity:0;
+        position: absolute;
+        left:0;
+        right:0;
+        top:40%;
+    }
+
+    .text{
+        font-size:40px;
+        color: white;
+    }
+
+    .card-text{
+        color:black;
+    }
+
+    .card-title{
+        color:black;
+    }
+
 {% endblock %}
 
 {% block body %}
@@ -57,10 +88,10 @@
 {% block div %}
 <br><br><br><br>
 <div style="margin-left:10% ; margin-right:10%">
-        <!-- <div class="container" align="center"> -->
         <div class="card-columns">
         {% for product in products %}
-        <div class="card border-dark">
+        <a href="{% url 'web:search_product' pk=product.pk %}">
+        <div class="card border-dark" id="crd">
             {% if product.image %}
             <img class="card-img-top " src="{{product.image.url}}" alt="Card image cap" height="200" >
             {% else %}
@@ -74,14 +105,15 @@
                     <br>
                     Price: {{product.price}}
                 </p>
-                <!-- <form action="{% url 'web:search_product' pk=product.pk %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-success text-body stretched-link">View Details</button>
-                </form> -->
-                <a href="{% url 'web:search_product' pk=product.pk %}" class="btn btn-success stretched-link" >View Details</a>
         
             </div>
+
+            <div class='middle'>
+                    <h1 align='center' class='text'>Click to Open</h1>
+            </div>
+
           </div>
+          </a>
           {% endfor %}
           </div>
           </div> 

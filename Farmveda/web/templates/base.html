@@ -9,18 +9,14 @@
             background-attachment: fixed;
         }
 
-        /* a:hover{
+        #img:hover{
             transform: scale(1.1);
-        } */
+        }
+    
 
         #cat:hover{
             transform: scale(1.0);
             box-shadow: none;
-        }
-
-        #go:hover{
-            transform: scale(1.1);
-            box-shadow: 5px 5px 5px black;
         }
 
            
@@ -51,7 +47,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg bg-info navbar-light fixed-top">
-            <a class="navbar-brand" href = "{% url 'web:home' %}">
+            <a class="navbar-brand" href = "{% url 'web:home' %}" id='img'>
                 <img src="{% static 'web/images/logo.jpg' %}" alt="Code_Busters" style="height:60px; width:200px">
             </a> 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#contents">
